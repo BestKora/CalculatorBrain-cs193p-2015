@@ -15,6 +15,7 @@ class ViewController: UIViewController
     @IBOutlet weak var history: UILabel!
     
     var userIsInTheMiddleOfTypingANumber = false
+    
     var userAlreadyEnteredADecimalPoint = false
     
     var brain = CalculatorBrain()
@@ -78,18 +79,16 @@ class ViewController: UIViewController
  
     @IBAction func backSpace(sender: AnyObject) {
         if userIsInTheMiddleOfTypingANumber {
-            if countElements(display.text!) > 1 {
+            if count(display.text!) > 1 {
                 display.text = dropLast(display.text!)
 //  смотрим не исчезла ли точка
                 if (display.text!.rangeOfString(".") != nil){
                     userAlreadyEnteredADecimalPoint = false
                 }
 //   если осталось "-0" то превращаем в 0
-                if (countElements(display.text!) == 2) && (display.text?.rangeOfString("-") != nil) {
+                if (count(display.text!) == 2) && (display.text?.rangeOfString("-") != nil) {
                     display.text = "0"
                 }
-
-
             } else {
                 display.text = "0"
                 userIsInTheMiddleOfTypingANumber = false
